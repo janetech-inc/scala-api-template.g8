@@ -42,7 +42,7 @@ class ApplicationTimer @Inject() (clock: Clock, appLifecycle: ApplicationLifecyc
   appLifecycle.addStopHook { () =>
     val stop: Instant = clock.instant
     val runningTime: Long = stop.getEpochSecond - start.getEpochSecond
-    logger.info(s"ApplicationTimer demo: Stopping application at ${clock.instant} after ${runningTime}s.")
+    logger.info("ApplicationTimer demo: Stopping application at %s after %s s.".format(clock.instant, runningTime))
     Future.successful(())
   }
 }
