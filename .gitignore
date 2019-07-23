@@ -1,1 +1,6 @@
+target/
+.idea
+.travis.yml
+project/project
+project/target
 .DS_Store
