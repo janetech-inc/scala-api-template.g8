@@ -1,5 +1,5 @@
-name := """$name"""
-organization := "Janetech"
+name := """$name$"""
+organization := "$organization$"
 
 version := "1.0-SNAPSHOT"
 
