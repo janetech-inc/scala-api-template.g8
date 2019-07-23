@@ -3,7 +3,7 @@ organization := "$organization$"
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file("."))
+lazy val root = (project in file("src/main/."))
   .settings(settings)
   .enablePlugins(PlayScala)
   .enablePlugins(JavaAppPackaging)
