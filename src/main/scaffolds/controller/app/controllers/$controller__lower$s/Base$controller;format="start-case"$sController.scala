@@ -1,4 +1,4 @@
-package controllers.$controller;format="lowercase"$
+package controllers.$controller;format="lowercase"$s
 
 import javax.inject.{Inject, Singleton}
 import play.api.mvc.{AbstractController, ControllerComponents, _}
