@@ -18,7 +18,6 @@ GET     /:version/$controller;format="lowercase"$s/:id               @controller
   * Base $controller;format="start-case"$s Controller - Initial version, versions extend from here
   */
 @Singleton
-
 abstract class Base$controller;format="start-case"$sController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
 
     def index(): Action[AnyContent] = Action.async { implicit request =>

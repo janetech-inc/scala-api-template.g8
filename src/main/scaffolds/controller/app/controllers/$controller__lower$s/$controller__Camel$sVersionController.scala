@@ -1,4 +1,4 @@
-package controllers.$controller;format="lowercase"$
+package controllers.$controller;format="lowercase"$s
 
 import controllers.controllers.BaseApiController
 import io.swagger.annotations.{Api, ApiOperation}
