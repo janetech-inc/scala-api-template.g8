@@ -31,4 +31,5 @@ Template applied in product-service
 Documentation:
 
 Giter8 - http://www.foundweekends.org/giter8/formatting.html
+
 SBT - https://www.scala-sbt.org/1.x/docs/index.html
