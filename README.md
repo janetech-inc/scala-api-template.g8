@@ -17,9 +17,10 @@ Template applied in git/./product-service
 
 # Adding controllers
 <pre>
-g8 janetech-inc/scala-api-template.g8 --directory src/main/scaffolds/controller --out product-service \
---controller=buyer \
---controller=collection
+<b>g8 janetech-inc/scala-api-template.g8</b>
+--directory src/main/scaffolds/controller \
+--out product-service \
+--controller=buyer
 
 
 Outputs:
