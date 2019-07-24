@@ -25,13 +25,12 @@ cd ~/git/product-service
 
 # Adding controllers
 <pre>
-g8 janetech-inc/scala-api-template.g8 --directory src/main/scaffolds/controller --out product-service
+g8 janetech-inc/scala-api-template.g8 --directory src/main/scaffolds/controller --out product-service \
+--controller=buyer \
+--controller=collection \
 
-/***************** Generates a controller *******************/
 
-     controller [products]: look
-
-/***********************************************************/
+Output:
 Template applied in product-service
 
 </pre>
