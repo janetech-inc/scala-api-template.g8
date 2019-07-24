@@ -5,7 +5,7 @@ Template for creating Janetech services
 brew update && brew install giter8
 
 
-# Creating a new api from this template
+# Create new service API
 <pre>
 <b>sbt new janetech-inc/scala-api-template.g8 \</b>
 --name=Product Service \
