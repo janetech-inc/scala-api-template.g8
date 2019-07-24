@@ -8,8 +8,7 @@ brew update && brew install giter8
 # Create new service API
 <pre>
 <b>sbt new janetech-inc/scala-api-template.g8 \</b>
---name=Product Service \
---organzation=janetech.io
+--name="Product Service"
 
 Ouputs:
 Template applied in git/./product-service
