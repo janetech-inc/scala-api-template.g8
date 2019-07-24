@@ -7,19 +7,12 @@ brew update && brew install giter8
 
 # Creating a new api from this template
 <pre>
-<b>sbt new janetech-inc/scala-api-template.g8</b>
+<b>sbt new janetech-inc/scala-api-template.g8 \</b>
+--name=Product Service \
+--organzation=janetech.io
 
-/***********************************************************/
-
-     name [Janetech API Seed Tempalte]: Product Service
-     organization [janetech.io]: 
-
-/***********************************************************/
-
+Ouputs:
 Template applied in git/./product-service
-
-cd ~/git/product-service
-
 </pre>
 
 
@@ -27,10 +20,9 @@ cd ~/git/product-service
 <pre>
 g8 janetech-inc/scala-api-template.g8 --directory src/main/scaffolds/controller --out product-service \
 --controller=buyer \
---controller=collection \
+--controller=collection
 
 
-Output:
+Outputs:
 Template applied in product-service
-
 </pre>
