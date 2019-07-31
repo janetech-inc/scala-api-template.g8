@@ -1,4 +1,4 @@
-# Janetech API Scaffold Template
+# JaneTech API Scaffold Template
 Template for creating Janetech services
 
 # Install g8 (Giter8)
