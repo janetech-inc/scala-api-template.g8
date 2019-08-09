@@ -10,10 +10,10 @@ set -o errexit
 set -o pipefail
 
 export_suffix() {
-  echo "export AWS_RESOURCE_NAME_SUFFIX=$1" >> $BASH_ENV
+  echo "export AWS_RESOURCE_NAME_SUFFIX=\$1" >> \$BASH_ENV
 }
 
-case "$CIRCLE_BRANCH" in
+case "\$CIRCLE_BRANCH" in
 "master")
   export_suffix "int"
   ;;
