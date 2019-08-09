@@ -25,13 +25,13 @@ deploy: &deploy
         account-url: AWS_ECR_ACCOUNT_URL
         aws-access-key-id: AWS_ACCESS_KEY_ID
         aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-        repo: "${AWS_RESOURCE_NAME_PREFIX}-${AWS_RESOURCE_NAME_SUFFIX}"
+        repo: "\${AWS_RESOURCE_NAME_PREFIX}-\${AWS_RESOURCE_NAME_SUFFIX}"
         region: AWS_DEFAULT_REGION
-        tag: "${CIRCLE_SHA1}"
+        tag: "\${CIRCLE_SHA1}"
     - aws-ecs/update-service:
-        family: "${AWS_RESOURCE_NAME_PREFIX}-service-${AWS_RESOURCE_NAME_SUFFIX}"
-        cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster-${AWS_RESOURCE_NAME_SUFFIX}"
-        container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service-${AWS_RESOURCE_NAME_SUFFIX},image-and-tag=${AWS_ECR_ACCOUNT_URL}/${AWS_RESOURCE_NAME_PREFIX}-${AWS_RESOURCE_NAME_SUFFIX}:${CIRCLE_SHA1}"
+        family: "\${AWS_RESOURCE_NAME_PREFIX}-service-\${AWS_RESOURCE_NAME_SUFFIX}"
+        cluster-name: "\${AWS_RESOURCE_NAME_PREFIX}-cluster-\${AWS_RESOURCE_NAME_SUFFIX}"
+        container-image-name-updates: "container=\${AWS_RESOURCE_NAME_PREFIX}-service-\${AWS_RESOURCE_NAME_SUFFIX},image-and-tag=\${AWS_ECR_ACCOUNT_URL}/\${AWS_RESOURCE_NAME_PREFIX}-\${AWS_RESOURCE_NAME_SUFFIX}:\${CIRCLE_SHA1}"
         verify-revision-is-deployed: true
     - successful_deployment_check
 
