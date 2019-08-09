@@ -1,0 +1,110 @@
+version: 2.1
+machine:
+  timezone: UTC
+  java:
+    version: oraclejdk11
+
+orbs:
+  aws-ecr: circleci/aws-ecr@6.1.0
+  aws-ecs: circleci/aws-ecs@0.0.8
+  
+defaults: &defaults
+  working_directory: ~/$name__lower$
+  docker:
+    - image: circleci/node:10-stretch
+
+deploy: &deploy
+  <<: *defaults
+  steps:
+    - checkout
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - set_env_vars
+    - aws-ecr/build-and-push-image:
+        checkout: false
+        account-url: AWS_ECR_ACCOUNT_URL
+        aws-access-key-id: AWS_ACCESS_KEY_ID
+        aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+        repo: "${AWS_RESOURCE_NAME_PREFIX}-${AWS_RESOURCE_NAME_SUFFIX}"
+        region: AWS_DEFAULT_REGION
+        tag: "${CIRCLE_SHA1}"
+    - aws-ecs/update-service:
+        family: "${AWS_RESOURCE_NAME_PREFIX}-service-${AWS_RESOURCE_NAME_SUFFIX}"
+        cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster-${AWS_RESOURCE_NAME_SUFFIX}"
+        container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service-${AWS_RESOURCE_NAME_SUFFIX},image-and-tag=${AWS_ECR_ACCOUNT_URL}/${AWS_RESOURCE_NAME_PREFIX}-${AWS_RESOURCE_NAME_SUFFIX}:${CIRCLE_SHA1}"
+        verify-revision-is-deployed: true
+    - successful_deployment_check
+
+    jobs:
+  setup_environment:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+        # Must implement
+      - save_cache:
+        # Must implement
+  deploy-int:
+    <<: *deploy
+  deploy-stage:
+    <<: *deploy
+  deploy-sandbox:
+    <<: *deploy
+  deploy-prod:
+    <<: *deploy
+
+workflows:
+  build_and_deploy:
+    jobs:
+      - setup_environment:
+          filters:
+            branches:
+              only:
+                - master
+                - staging
+                - production
+                - sandbox
+      - deploy-int:
+          context: integration
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - setup_environment
+      - deploy-stage:
+          context: staging
+          filters:
+            branches:
+              only:
+                - staging
+          requires:
+            - setup_environment
+      - deploy-sandbox:
+          context: sandbox
+          filters:
+            branches:
+              only:
+                - sandbox
+          requires:
+            - setup_environment
+      - deploy-prod:
+          context: production
+          filters:
+            branches:
+              only:
+                - production
+          requires:
+            - setup_environment
+
+commands:
+  set_env_vars:
+    steps:
+      - run:
+          name: "Setup custom AWS environment variables"
+          command: bash ./deploy/configure_resource_suffix.sh
+  successful_deployment_check:
+    steps:
+      - run:
+          name: Test the deployment
+          command: bash ./deploy/check_deployment_success.sh
