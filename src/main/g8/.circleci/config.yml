@@ -9,7 +9,7 @@ orbs:
   aws-ecs: circleci/aws-ecs@0.0.8
   
 defaults: &defaults
-  working_directory: ~/$name__lower$
+  working_directory: ~/$name$
   docker:
     - image: circleci/node:10-stretch
 
