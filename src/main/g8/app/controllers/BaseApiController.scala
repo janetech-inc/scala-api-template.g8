@@ -1,7 +1,5 @@
 package controllers
 
-package controllers
-
 import akka.stream.scaladsl.Source
 import akka.util.ByteString
 import io.swagger.annotations.{ApiOperation, ApiParam, ApiResponse, ApiResponses}
