@@ -1,6 +1,6 @@
 package controllers.$controller;format="lowercase"$s
 
-import controllers.controllers.BaseApiController
+import controllers.BaseApiController
 import io.swagger.annotations.{Api, ApiOperation}
 import javax.inject.Inject
 import play.api.mvc.{Action, AnyContent, ControllerComponents}
